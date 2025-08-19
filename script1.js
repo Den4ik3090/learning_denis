@@ -156,6 +156,7 @@ const num=52;
 (num === 50) ? console.log(`Ok`) : console.log('Ошибка');
 
 //  Исползлвание Switch несколько проверок и условий СТРОГО СРАВНЕНИЕ 
+// Если указывать значение не число а строки , будет то же самое 
  const num=49;
  switch (num){
     case 49:
@@ -173,6 +174,20 @@ const num=52;
  }
 
 
+// const hamburger= 5;
+// const fries= 0;
+// if (hamburger&&fries) {
+//     console.log('Я сыт!');
+// }
+
+const hamburger= 2;
+const fries= 1;
+if (hamburger >= 3 && fries) {
+    console.log('Заказ готов! И все сыты !');
+}
+else{
+    console.log('Мы уходим!')
+}
 
     
     
