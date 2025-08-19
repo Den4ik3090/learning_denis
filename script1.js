@@ -109,26 +109,71 @@
 //     arr.push(34)
 //     let filtered= filterRange(arr,8,40);
 //     console.log(filtered);
- let inc=10; //Присваивание
-     dec=10;
-    inc++;
-    dec--;
-     console.log(inc);
-     console.log(dec);
+//  let inc=10; //Присваивание
+//      dec=10;
+//     inc++;
+//     dec--;
+//      console.log(inc);
+//      console.log(dec);
 
-     console.log(5%2);
+//      console.log(5%2);
  
-    //  Оператор И- будет true если Все значения  true
-    const isChecked= true;
-            isClose= true;
-            isBase= false; //Бует итог false  так как  оператор И 
-    console.log(isChecked && isClose && isBase);      
+//     //  Оператор И- будет true если Все значения  true
+//     const isChecked= true;
+//             isClose= true;
+//             isBase= false; //Бует итог false  так как  оператор И 
+//     console.log(isChecked && isClose && isBase);      
     
-    //Оператор ИЛИ || (! отрицание )
-       const isChecked= false;
-            isClose= false;
-            isBase= false; //Бует итог false  так как  оператор И 
-    console.log(!isChecked  || isClose);      
+//     //Оператор ИЛИ || (! отрицание )
+//        const isChecked= false;
+//             isClose= false;
+//             isBase= false; //Бует итог false  так как  оператор И 
+//     console.log(isChecked  || !isClose);  //Используем оператор отрицание !
+
+     //  If esle -условия 
+if (1){
+    console.log(`OK`)
+}
+else {
+    console.log('Ошибка')
+}
+
+
+     //  Пример с условиями 
+const num=50;
+if(num<50){
+    console.log('Больше');
+}
+else if (num>100){
+    console.log('Слишком много');
+}
+else {
+    console.log('Ok')
+}
+
+     // Вариант условия- краткая запись 
+const num=52;
+(num === 50) ? console.log(`Ok`) : console.log('Ошибка');
+
+//  Исползлвание Switch несколько проверок и условий СТРОГО СРАВНЕНИЕ 
+ const num=49;
+ switch (num){
+    case 49:
+        console.log('Неверно');
+        break;
+    case 100: 
+        console.log('Неверно');
+        break;
+    case 80:
+        console.log('В точку');
+        break;
+    default:
+        console.log('Не в этот раз');
+        break;       
+ }
+
+
+
     
     
           
