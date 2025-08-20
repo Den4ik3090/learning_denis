@@ -180,15 +180,99 @@ const num=52;
 //     console.log('Я сыт!');
 // }
 
-const hamburger= 2;
-const fries= 1;
-if (hamburger >= 3 && fries) {
+const hamburger= 3;
+const fries= 2;
+const cola=2;
+
+console.log(((hamburger === 3 && cola && fries)));
+
+// &(Оператор И) всегда запинается на лжи и возвращает 1-ое ложное значение 
+// Если все аргументы верны  то он возвращает данные последнего аргумента!
+console.log(1 && 0);
+console.log(1 && 5);
+console.log(null && 5);
+console.log(0 && 'dfsdfsdf');
+
+// || или 
+const hamburger= 0;
+const fries= 0;
+const cola=0;
+ if (hamburger||fries||cola){
+    console.log(`Все довольны!`)
+ }
+ else{
+    console.log(` Идем в другое место `)
+ } 
+
+
+if (hamburger === 3 && cola===1 && fries) {
     console.log('Заказ готов! И все сыты !');
 }
 else{
     console.log('Мы уходим!')
 }
 
+// &(Оператор ИЛИ) всегда запинается на лжи и возвращает 1-ое верное  значение
+let johnReport, samReport, mariaReport=`done`, alexReport=`Ok`;
+console.log(johnReport||samReport||alexReport||mariaReport)
+
+// Варинат с большими условиями (Комбинация) ( Нужно ИЛИ 3 гамбургер и 2 колы , ИЛИ 3 картошки фри и 1 нагетсы )
     
-    
-          
+   const hamburger= 3;
+const fries= 3;
+const cola=0;
+const naggets=4;
+
+ if (hamburger===3 && cola ===2||fries===3 && naggets){
+    console.log(`Все довольны!`)
+ }
+ else{
+    console.log(` Идем в другое место `)
+ } 
+//  Вначале будет порядок (===true,===false,&& false, ===true, ===true, false||true и вернет последнее значение true= naggets)
+ console.log(hamburger===3 && (cola ===2||fries===3) && naggets);
+
+if (hamburger === 3 && cola===1 && fries) {
+    console.log('Заказ готов! И все сыты !');
+}
+else{
+    console.log('Мы уходим!')
+} 
+
+console.log(!0);
+
+                                // ЗАДАЧИ!
+console.log(`good` || 2 || undefined || 5);  //   Условие ||-ИЛИ _Выведет   первое  значение true                             
+console.log(NaN&&2&&undefined); // Enter NaN, the first value
+console.log( 1 && 2 && 3 );
+console.log( !1 && 2 || !3 );
+console.log( 25 || null && !3 );
+console.log( NaN || null || !3 || undefined || 5);
+
+console.log( NaN || null && !3 && undefined || 5);
+
+console.log( 5 === 5 && 3 > 1 || 5);
+
+
+const hamburger = 3;
+const fries = 3;
+const cola = 0;
+const nuggets = 2;
+
+if (hamburger === 3 && cola || fries === 3 && nuggets) {
+   console.log('Done!')
+}
+
+
+const hamburger=0;
+const fries = NaN;
+const cola = 0;
+const nuggets = 0;
+
+if (hamburger || cola || fries === 3 || nuggets) {
+   console.log('Done!')
+}
+else{
+    console.log(`Problem`)
+}
+
