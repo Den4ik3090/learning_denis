@@ -253,7 +253,7 @@ console.log( NaN || null && !3 && undefined || 5);
 
 console.log( 5 === 5 && 3 > 1 || 5);
 
-
+//  Все условия выполнятся
 const hamburger = 3;
 const fries = 3;
 const cola = 0;
@@ -263,7 +263,7 @@ if (hamburger === 3 && cola || fries === 3 && nuggets) {
    console.log('Done!')
 }
 
-
+// Условие не выполнится и отобразится PROBLEM
 const hamburger=0;
 const fries = NaN;
 const cola = 0;
@@ -275,4 +275,43 @@ if (hamburger || cola || fries === 3 || nuggets) {
 else{
     console.log(`Problem`)
 }
+
+// Условие не выполнится !
+let hamburger;
+const fries = NaN;
+const cola = 0;
+const nuggets = 2;
+
+if (hamburger && cola || fries === 3 && nuggets) {
+   console.log('Done!')
+}
+
+let i=10;
+ for(let i=0; i<12; i++){
+    console.log(i)
+ }
+
+
+//Задача по  вложенному циклу !
+ let result=('');
+ const lengthString=7; 
+ for (let i=1;i<lengthString;i++){
+    for(let j=0;j<i;j++){
+        result=result+("*");
+
+    }
+    result=result+'\n';
+ }
+ console.log(result)
+// Пример вложенных циклов по перебору (метка, break , continue)
+first:for(let i=0;i<3;i++){
+    console.log(`FirstLevel: ${i}`);
+     for(let j=0;j<3;j++){
+         console.log(`SecondLevel: ${j}`)
+             for(let k=0;k<3;k++){
+                if (k===2) continue first;
+                 console.log(`ThirdLevel: ${k}`)
+             }
+        }
+  }
 
