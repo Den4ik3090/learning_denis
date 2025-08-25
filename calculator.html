@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .display {
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 2em;
+            padding: 20px;
+            width: 100%;
+            text-align: right;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2em;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.operator {
+            background: rgba(255, 193, 7, 0.3);
+        }
+
+        .btn.operator:hover {
+            background: rgba(255, 193, 7, 0.5);
+        }
+
+        .btn.equals {
+            background: rgba(40, 167, 69, 0.3);
+            grid-column: span 2;
+        }
+
+        .btn.equals:hover {
+            background: rgba(40, 167, 69, 0.5);
+        }
+
+        .btn.clear {
+            background: rgba(220, 53, 69, 0.3);
+        }
+
+        .btn.clear:hover {
+            background: rgba(220, 53, 69, 0.5);
+        }
+
+        .advanced-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .advanced-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .advanced-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .result-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-display {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 25px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Калькулятор</h1>
+        
+        <input type="text" class="display" id="display" readonly>
+        
+        <div class="buttons">
+            <button class="btn clear" onclick="clearDisplay()">C</button>
+            <button class="btn clear" onclick="clearEntry()">CE</button>
+            <button class="btn operator" onclick="appendToDisplay('/')">/</button>
+            <button class="btn operator" onclick="appendToDisplay('*')">×</button>
+            
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn operator" onclick="appendToDisplay('-')">-</button>
+            
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn operator" onclick="appendToDisplay('+')">+</button>
+            
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn equals" onclick="calculate()" rowspan="2">=</button>
+            
+            <button class="btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+        </div>
+
+        <div class="advanced-section">
+            <div class="advanced-title">Дополнительные функции</div>
+            <div class="advanced-buttons">
+                <button class="btn operator" onclick="advancedCalc('sqrt')">√x</button>
+                <button class="btn operator" onclick="advancedCalc('square')">x²</button>
+                <button class="btn operator" onclick="advancedCalc('cube')">x³</button>
+                <button class="btn operator" onclick="power()">x^y</button>
+                <button class="btn operator" onclick="advancedCalc('factorial')">x!</button>
+                <button class="btn operator" onclick="advancedCalc('abs')">|x|</button>
+                <button class="btn operator" onclick="advancedCalc('sin')">sin</button>
+                <button class="btn operator" onclick="advancedCalc('cos')">cos</button>
+                <button class="btn operator" onclick="advancedCalc('tan')">tan</button>
+                <button class="btn operator" onclick="advancedCalc('log')">log</button>
+                <button class="btn operator" onclick="advancedCalc('ln')">ln</button>
+                <button class="btn operator" onclick="modulo()">mod</button>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <div class="result-title">Результат:</div>
+            <div class="result-display" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let result = document.getElementById('result');
+        let currentInput = '';
+        let operator = '';
+        let firstOperand = '';
+
+        // Функции калькулятора из function.js
+        function calculator(num1, num2, operation) {
+            const a = parseFloat(num1);
+            const b = parseFloat(num2);
+            
+            if (isNaN(a) || isNaN(b)) {
+                return "Ошибка: Введите корректные числа";
+            }
+            
+            switch (operation.toLowerCase()) {
+                case 'add':
+                case '+':
+                    return a + b;
+                case 'subtract':
+                case '-':
+                    return a - b;
+                case 'multiply':
+                case '*':
+                    return a * b;
+                case 'divide':
+                case '/':
+                    if (b === 0) {
+                        return "Ошибка: Деление на ноль";
+                    }
+                    return a / b;
+                case 'power':
+                case '**':
+                case '^':
+                    return Math.pow(a, b);
+                case 'modulo':
+                case '%':
+                    if (b === 0) {
+                        return "Ошибка: Модуло на ноль";
+                    }
+                    return a % b;
+                default:
+                    return "Ошибка: Неверная операция";
+            }
+        }
+
+        function advancedCalculator(num, operation) {
+            const a = parseFloat(num);
+            
+            if (isNaN(a)) {
+                return "Ошибка: Введите корректное число";
+            }
+            
+            switch (operation.toLowerCase()) {
+                case 'sqrt':
+                    if (a < 0) {
+                        return "Ошибка: Квадратный корень из отрицательного числа";
+                    }
+                    return Math.sqrt(a);
+                case 'square':
+                    return a * a;
+                case 'cube':
+                    return a * a * a;
+                case 'sin':
+                    return Math.sin(a);
+                case 'cos':
+                    return Math.cos(a);
+                case 'tan':
+                    return Math.tan(a);
+                case 'log':
+                    if (a <= 0) {
+                        return "Ошибка: Логарифм от нуля или отрицательного числа";
+                    }
+                    return Math.log10(a);
+                case 'ln':
+                    if (a <= 0) {
+                        return "Ошибка: Натуральный логарифм от нуля или отрицательного числа";
+                    }
+                    return Math.log(a);
+                case 'abs':
+                    return Math.abs(a);
+                case 'factorial':
+                    if (a < 0 || !Number.isInteger(a)) {
+                        return "Ошибка: Факториал только для неотрицательных целых чисел";
+                    }
+                    let result = 1;
+                    for (let i = 2; i <= a; i++) {
+                        result *= i;
+                    }
+                    return result;
+                default:
+                    return "Ошибка: Неверная операция";
+            }
+        }
+
+        // Функции интерфейса
+        function appendToDisplay(value) {
+            if (display.value === '0' && value !== '.') {
+                display.value = value;
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '';
+            result.textContent = '';
+            currentInput = '';
+            operator = '';
+            firstOperand = '';
+        }
+
+        function clearEntry() {
+            display.value = '';
+        }
+
+        function calculate() {
+            try {
+                const expression = display.value.replace(/×/g, '*');
+                const evalResult = eval(expression);
+                result.textContent = evalResult;
+                display.value = evalResult;
+            } catch (error) {
+                result.textContent = 'Ошибка в выражении';
+            }
+        }
+
+        function advancedCalc(operation) {
+            const value = display.value;
+            if (value === '') {
+                result.textContent = 'Введите число';
+                return;
+            }
+            
+            const calcResult = advancedCalculator(value, operation);
+            result.textContent = `${operation}(${value}) = ${calcResult}`;
+            display.value = calcResult;
+        }
+
+        function power() {
+            if (display.value === '') {
+                result.textContent = 'Введите число';
+                return;
+            }
+            appendToDisplay('^');
+        }
+
+        function modulo() {
+            if (display.value === '') {
+                result.textContent = 'Введите число';
+                return;
+            }
+            appendToDisplay('%');
+        }
+
+        // Поддержка клавиатуры
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                appendToDisplay(key);
+            } else if (key === '.') {
+                appendToDisplay('.');
+            } else if (key === '+') {
+                appendToDisplay('+');
+            } else if (key === '-') {
+                appendToDisplay('-');
+            } else if (key === '*') {
+                appendToDisplay('*');
+            } else if (key === '/') {
+                event.preventDefault();
+                appendToDisplay('/');
+            } else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
+                calculate();
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                clearDisplay();
+            } else if (key === 'Backspace') {
+                display.value = display.value.slice(0, -1);
+            }
+        });
+    </script>
+</body>
+</html>
