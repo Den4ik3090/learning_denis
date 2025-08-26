@@ -155,3 +155,25 @@ console.log("Cube of 3:", advancedCalculator(3, 'cube'));
 console.log("Factorial of 5:", advancedCalculator(5, 'factorial'));
 console.log("Absolute value of -10:", advancedCalculator(-10, 'abs'));
 
+// Каждоее четное число умножает на 3 и складывает их
+function sumOfTripledEvevens(array){
+    let sum=0;
+    for(let i=0;i<array.length;i++){
+        if (array[i]%2==0){
+            const tripleEvenNumber=array[i]*3 ;
+            sum+=tripleEvenNumber;
+        }
+
+    }
+    return sum;
+}
+console.log(sumOfTripledEvevens([1,2,3,4,5,6]));
+
+// Используем все три метода (filter,map,reduce)
+function theeSum(array){
+    return array
+    .filter((num)=>num%2==0)
+    .map((num)=>num*3)
+    .reduce((one,two)=>one+two)
+}
+console.log(theeSum([1,2,3,4]))
